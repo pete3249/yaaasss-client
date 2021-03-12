@@ -1,8 +1,17 @@
 import React from 'react';
+import RestaurantSearchForm from '../components/RestaurantSearchForm'
 
 class RestaurantIndexContainer extends React.Component {
+    state = {
+        restaurants: [],
+    }
+
     render() {
-        return <div>Inside Restaurant Index Container</div>
+        return (
+            <section className="max-w-6xl mx-auto mt-10"> 
+                < RestaurantSearchForm />
+            </section>
+        )
     }
 }
 
