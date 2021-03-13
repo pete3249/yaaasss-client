@@ -20,7 +20,15 @@ class RestaurantSearchForm extends React.Component {
             'Content-Type': 'application/json'
             }
         })
-    }
+        .then(res => res.json())
+        .then(restaurants => {
+            return this.props.addRestaurants(restaurants.businesses) 
+        })
+        this.setState({
+            categories: '',
+            location: ''
+        })
+    } 
     
     render() {
         return (
@@ -32,7 +40,7 @@ class RestaurantSearchForm extends React.Component {
                             type="text"
                             name="categories"
                             onChange={this.handleChange}
-                            value={this.state.category}
+                            value={this.state.categories}
                             placeholder="Choose a category"
                             className="w-full border p-4 my-4"
                         />

@@ -1,5 +1,6 @@
 import React from 'react';
-import RestaurantSearchForm from '../components/RestaurantSearchForm'
+import RestaurantSearchForm from '../components/RestaurantSearchForm';
+import { connect } from 'react-redux';
 
 class RestaurantIndexContainer extends React.Component {
     state = {
@@ -9,10 +10,16 @@ class RestaurantIndexContainer extends React.Component {
     render() {
         return (
             <section className="max-w-6xl mx-auto mt-10"> 
-                < RestaurantSearchForm />
+                < RestaurantSearchForm addRestaurants={this.props.addRestaurants}/>
             </section>
         )
     }
 }
 
-export default RestaurantIndexContainer;
+const mapDispatchToProps = dispatch => {
+    return {
+        addRestaurants: restaurants => dispatch({type: "ADD_RESTAURAUNTS", restaurants})
+    }
+} 
+    
+export default connect(null, mapDispatchToProps)(RestaurantIndexContainer);
