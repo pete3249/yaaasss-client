@@ -33,16 +33,16 @@ class RestaurantSearchForm extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleOnSubmit}>
-                <h1 className="text-center text-3xl font-semibold mb-2">Find a Local Restaurant</h1>
+                <h1 className="text-gray-900 text-center text-3xl font-semibold">Find your perfect hangout</h1>
+                <form onSubmit={this.handleOnSubmit} className="max-w-lg mx-auto w-3/4 mt-2">
                     <fieldset>
                         <input
                             type="text"
                             name="categories"
                             onChange={this.handleChange}
                             value={this.state.categories}
-                            placeholder="Choose a category"
-                            className="w-full border p-4 my-4"
+                            placeholder="Category"
+                            className="mx-auto w-8/12 border p-3 my-3 block"
                         />
                     </fieldset>
                     <fieldset>
@@ -52,10 +52,12 @@ class RestaurantSearchForm extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.location}
                             placeholder="Enter a zip code"
-                            className="w-full border p-4 my-4"
+                            className="mx-auto w-8/12 border p-3 my-3 block"
                         />
                     </fieldset>
-                    <button className="w-full p-4 bg-blue-300 mt-4 hover:bg-blue-400 transition-all duration-200" type="submit">Search</button>
+                    <fieldset>
+                        <button className="block mx-auto w-8/12 bg-gray-900 text-white px-3 py-3 rounded rounded-md text-sm font-large hover:bg-purple-500 border my-3" type="submit">Search</button>
+                    </fieldset>
                 </form>
             </div>
         )
