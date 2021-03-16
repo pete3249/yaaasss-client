@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class RestaurantIndexContainer extends React.Component {
     render() {
         return (
-            <section className="max-w-6xl mx-auto mt-10"> 
+            <section className="max-w-6xl mx-auto mt-8"> 
                 < RestaurantSearchForm addRestaurants={this.props.addRestaurants}/>
                 {this.props.restaurants.length > 0 ? <RestaurantList restaurants={this.props.restaurants}/>: ''}
             </section>
