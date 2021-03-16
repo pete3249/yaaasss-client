@@ -3,7 +3,7 @@ import RestaurantListItem from './RestaurantListItem';
 
 const RestaurantList = ({restaurants}) => {
     return (
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-3 gap-4">
           {restaurants.map(restaurant => <RestaurantListItem key={restaurant.id} restaurant={restaurant}/>)}
       </div>
     );
