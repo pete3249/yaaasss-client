@@ -2,13 +2,14 @@ import React from 'react';
 import RestaurantSearchForm from '../components/RestaurantSearchForm';
 import RestaurantList from '../components/RestaurantList';
 import { connect } from 'react-redux';
+import { fetchRestaurants } from '../actions/restaurants';
 
 class RestaurantIndexContainer extends React.Component {
     render() {
         return (
             <section className="max-w-6xl mx-auto mt-8"> 
-                < RestaurantSearchForm addRestaurants={this.props.addRestaurants}/>
-                {this.props.restaurants.length > 0 ? <RestaurantList restaurants={this.props.restaurants}/>: ''}
+                < RestaurantSearchForm fetchRestaurants={this.props.fetchRestaurants}/>
+                {this.props.loadingState === 'successful' ? (<RestaurantList restaurants={this.props.restaurants}/>) : ('')}
             </section>
         )
     }
@@ -16,13 +17,14 @@ class RestaurantIndexContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        restaurants: state.restaurants
+        restaurants: state.restaurants.list,
+        loadingState: state.restaurants.loadingState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addRestaurants: restaurants => dispatch({type: "ADD_RESTAURAUNTS", restaurants})
+        fetchRestaurants: (categories, location) => dispatch(fetchRestaurants(categories, location))
     }
 } 
     
