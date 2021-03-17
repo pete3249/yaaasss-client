@@ -14,21 +14,12 @@ class RestaurantSearchForm extends React.Component {
     
     handleOnSubmit = e => {
         e.preventDefault();
-        fetch(`http://localhost:3001/restaurant_search/?categories=${this.state.categories}&location=${this.state.location}`, {
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(restaurants => {
-            return this.props.addRestaurants(restaurants.businesses) 
-        })
+        this.props.fetchRestaurants(this.state.categories, this.state.location);
         this.setState({
             categories: '',
             location: ''
         })
-    } 
+    }
     
     render() {
         return (
