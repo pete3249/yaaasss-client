@@ -1,12 +1,13 @@
 import { 
     START_LOADING_USERS, 
     ADD_USERS, 
-    SUCCESSFULLY_LOADED_USERS
+    SUCCESSFULLY_LOADED_USERS,
 } from '../actions/index'
 
 const initialState = {
     loadingState: 'notStarted',
-    list: []
+    list: [],
+    friendList: []
 }
 
 export default function userReducer(state = initialState, action) {
