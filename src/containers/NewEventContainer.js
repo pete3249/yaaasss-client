@@ -2,6 +2,7 @@ import React from 'react';
 import Checkbox from '../components/Checkbox';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions/users';
+import { createEvent } from '../actions/event';
 
 class NewEventContainer extends React.Component {
     state = {
@@ -34,21 +35,8 @@ class NewEventContainer extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        
-
-        // this.props.addEvent()
-        
-        
-        fetch("http://localhost:3001/events", {
-            method: "post",
-            body: {
-                event: this.state
-            }
-        })
-        .then(res => res.json())
-        .then(eventJSON => {
-            console.log(eventJSON);
-        })
+        this.props.createEvent(this.state);
+    
     }
 
     render() {
@@ -160,7 +148,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUsers: () => dispatch(fetchUsers())
+        fetchUsers: () => dispatch(fetchUsers()),
+        createEvent: eventData => dispatch(createEvent(eventData))
     }
 }
 
