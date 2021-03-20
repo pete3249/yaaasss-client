@@ -6,8 +6,7 @@ import {
 
 const initialState = {
     loadingState: 'notStarted',
-    list: [],
-    friendList: []
+    list: []
 }
 
 export default function userReducer(state = initialState, action) {
