@@ -2,7 +2,6 @@ import React from 'react';
 import Checkbox from '../components/Checkbox';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions/users';
-import { createEvent } from '../actions/event';
 
 class NewEventContainer extends React.Component {
     state = {
@@ -20,23 +19,50 @@ class NewEventContainer extends React.Component {
     }
 
     handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        this.setState({[e.target.name]: e.target.value})
     }
 
     handleFriendChange = userId => {
         if(this.state.invited_user_ids.some(friend => friend === userId)) {
-            this.setState({invited_user_ids: this.state.invited_user_ids.filter(friend => friend !== userId)})
+            this.setState({
+                ...this.state, 
+                invited_user_ids: this.state.invited_user_ids.filter(friend => friend !== userId)
+            })   
         } else {
-            this.setState({invited_user_ids: this.state.invited_user_ids.concat(userId)})
+            this.setState({
+                ...this.state, 
+                invited_user_ids: this.state.invited_user_ids.concat(userId)
+            })
         }
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.createEvent(this.state);
-        this.props.history.push('/');
+        this.createEvent(this.state);
+    }
+
+    createEvent = (eventData) => {
+        fetch('http://localhost:3001/events', {
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({event: eventData})
+        })
+        .then(res => {
+            if(res.ok) {
+                return res.json()
+            } else {
+                return res.json().then(errors => Promise.reject(errors))
+            }
+        })
+        .then(eventJson => {
+            this.props.history.push('/');
+        })
+        .catch((errors) => {
+            console.log(errors)
+        })
     }
 
     render() {
@@ -125,7 +151,7 @@ class NewEventContainer extends React.Component {
                     <fieldset className="block pb-4">
                         <label htmlFor="invited_user_ids" >Invite Friends</label>
                         <>
-                        {this.props.users.map(user => <Checkbox key={user.id} user={user} handleFriendChange={this.handleFriendChange}/>)}
+                        {this.props.users.map(user => <Checkbox key={user.id} user={user} handleFriendChange={(id) => this.handleFriendChange(id)}/>)}
                     </>
                     </fieldset>
                     <button
@@ -149,7 +175,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUsers: () => dispatch(fetchUsers()),
-        createEvent: eventData => dispatch(createEvent(eventData))
     }
 }
 
