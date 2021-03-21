@@ -1,4 +1,4 @@
-import { SUCCESSFULLY_CREATED_EVENT} from '.'
+import { SUCCESSFULLY_CREATED_EVENT } from '.'
 
 export const createEvent = (eventData) => {
     return (dispatch) => {
