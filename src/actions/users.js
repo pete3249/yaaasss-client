@@ -1,7 +1,7 @@
 import { 
     START_LOADING_USERS,
     ADD_USERS,
-    SUCCESSFULLY_LOADED_USERS
+    SUCCESSFULLY_LOADED_USERS,
 } from '.'
 
 export const fetchUsers = () => {
