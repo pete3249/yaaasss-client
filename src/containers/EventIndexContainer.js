@@ -12,7 +12,7 @@ class EventIndexContainer extends React.Component {
 
     render() {
         if(this.state.loading) {
-            return <div>Loading spinner</div>
+            return <div>Hi there</div>
         }
         return <div>Inside Event Index Container</div>
     }
