@@ -1,21 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchEvents } from '../actions/event';
+import CreatedEventList from '../components/CreatedEventList'
 
 class EventIndexContainer extends React.Component {
-    state = {
-        events: [],
-        loading: true
-    }
-
-    componentDidMount() {
-
+    componentDidMount() { 
+        if(this.props.loadingState === 'notStarted') {
+            this.props.fetchEvents();
+        }
     }
 
     render() {
-        if(this.state.loading) {
-            return <div>Hi there</div>
-        }
-        return <div>Inside Event Index Container</div>
+        return (
+            <div>
+                {this.props.createdEvents.length > 0 ? (< CreatedEventList events={this.props.createdEvents} />) : ''}
+            </div>
+        )
     }
 }
 
-export default EventIndexContainer;
+const mapStateToProps = state => {
+    return {
+        loadingState: state.events.loadingState,
+        createdEvents: state.events.createdEvents,
+        invitedEvents: state.events.invitedEvents
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchEvents: () => dispatch(fetchEvents())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventIndexContainer);
