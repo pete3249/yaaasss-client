@@ -12,7 +12,7 @@ class NewEventContainer extends React.Component {
         location: this.props.location.state.restaurant.name,
         address: this.props.location.state.restaurant.location.address1,
         notes: '',
-        friends: []
+        invited_user_ids: []
     }
 
     componentDidMount() { 
@@ -26,17 +26,17 @@ class NewEventContainer extends React.Component {
     }
 
     handleFriendChange = userId => {
-        if(this.state.friends.some(friend => friend === userId)) {
-            this.setState({friends: this.state.friends.filter(friend => friend !== userId)})
+        if(this.state.invited_user_ids.some(friend => friend === userId)) {
+            this.setState({invited_user_ids: this.state.invited_user_ids.filter(friend => friend !== userId)})
         } else {
-            this.setState({friends: this.state.friends.concat(userId)})
+            this.setState({invited_user_ids: this.state.invited_user_ids.concat(userId)})
         }
     }
 
     handleSubmit = event => {
         event.preventDefault();
         this.props.createEvent(this.state);
-    
+        this.props.history.push('/');
     }
 
     render() {
@@ -123,7 +123,7 @@ class NewEventContainer extends React.Component {
                         />
                     </fieldset>
                     <fieldset className="block pb-4">
-                        <label htmlFor="friends" >Invite Friends</label>
+                        <label htmlFor="invited_user_ids" >Invite Friends</label>
                         <>
                         {this.props.users.map(user => <Checkbox key={user.id} user={user} handleFriendChange={this.handleFriendChange}/>)}
                     </>
