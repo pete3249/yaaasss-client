@@ -3,7 +3,8 @@ import {
     ADD_EVENTS,
     SUCCESSFULLY_LOADED_EVENTS,
     ADD_EVENT,
-    DELETE_EVENT
+    DELETE_EVENT,
+    ADD_INVITED_EVENTS
 } from '../actions/index';
 
 const initialState = {
@@ -19,8 +20,7 @@ export default function EventReducer(state = initialState, action) {
         case ADD_EVENTS:
             return {
                 ...state, 
-                createdEvents: action.payload.created_events,
-                invitedEvents: action.payload.invited_events,
+                createdEvents: action.payload,
                 loadingState: 'successful'
             }
         case SUCCESSFULLY_LOADED_EVENTS:
@@ -37,6 +37,12 @@ export default function EventReducer(state = initialState, action) {
                     ...state,
                     createdEvents: state.createdEvents.concat(action.payload)
                 }
+            }
+        case ADD_INVITED_EVENTS:
+            return {
+                ...state,
+                invitedEvents: action.payload,
+                loadingState: 'successful'
             }
         case DELETE_EVENT:
             const createdEvents = state.createdEvents.filter(event => event.id !== action.payload)
