@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/event';
-import CreatedEventList from '../components/CreatedEventList'
+import { deleteEvent } from '../actions/event';
+import CreatedEventList from '../components/CreatedEventList';
 
 class EventIndexContainer extends React.Component {
     componentDidMount() { 
@@ -13,7 +14,7 @@ class EventIndexContainer extends React.Component {
     render() {
         return (
             <div>
-                {this.props.createdEvents.length > 0 ? (< CreatedEventList events={this.props.createdEvents} />) : ''}
+                {this.props.createdEvents.length > 0 ? (< CreatedEventList events={this.props.createdEvents} handleDeleteEvent={this.props.dispatchHandleDeleteEvent} />) : ''}
             </div>
         )
     }
@@ -29,7 +30,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchEvents: () => dispatch(fetchEvents())
+        fetchEvents: () => dispatch(fetchEvents()),
+        dispatchHandleDeleteEvent: eventId => dispatch(deleteEvent(eventId))
     }
 }
 

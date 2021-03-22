@@ -2,7 +2,8 @@ import {
     START_LOADING_EVENTS,
     ADD_EVENTS,
     SUCCESSFULLY_LOADED_EVENTS,
-    ADD_EVENT
+    ADD_EVENT,
+    DELETE_EVENT
 } from '../actions/index';
 
 const initialState = {
@@ -36,6 +37,12 @@ export default function EventReducer(state = initialState, action) {
                     ...state,
                     createdEvents: state.createdEvents.concat(action.payload)
                 }
+            }
+        case DELETE_EVENT:
+            const createdEvents = state.createdEvents.filter(event => event.id !== action.payload)
+            return {
+                ...state,
+                createdEvents: createdEvents
             }
         default:
             return state

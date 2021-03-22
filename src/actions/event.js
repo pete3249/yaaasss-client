@@ -2,7 +2,8 @@ import {
     START_LOADING_EVENTS,
     ADD_EVENTS,
     SUCCESSFULLY_LOADED_EVENTS,
-    ADD_EVENT
+    ADD_EVENT,
+    DELETE_EVENT
 } from '.'
 
 export const fetchEvents = () => {
@@ -30,6 +31,28 @@ export const addEvent = event => {
         dispatch({
             type: ADD_EVENT, 
             payload: event
+        })
+    }
+}
+
+export const deleteEvent = eventId => {
+    return (dispatch) => {
+        return fetch(`http://localhost:3001/events/${eventId}`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            }
+        })
+        .then(res => {
+            if (res.ok) {
+                dispatch({
+                    type: DELETE_EVENT,
+                    payload: eventId
+                })
+            } else {
+              console.log(res)
+            }
         })
     }
 }
