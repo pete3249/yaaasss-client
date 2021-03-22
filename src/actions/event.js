@@ -1,7 +1,8 @@
 import {
     START_LOADING_EVENTS,
     ADD_EVENTS,
-    SUCCESSFULLY_LOADED_EVENTS
+    SUCCESSFULLY_LOADED_EVENTS,
+    ADD_EVENT
 } from '.'
 
 export const fetchEvents = () => {
@@ -21,5 +22,14 @@ export const fetchEvents = () => {
             });
         })
         .then(() => dispatch({type: SUCCESSFULLY_LOADED_EVENTS}))
+    }
+}
+
+export const addEvent = event => {
+    return (dispatch) => {
+        dispatch({
+            type: ADD_EVENT, 
+            payload: event
+        })
     }
 }
