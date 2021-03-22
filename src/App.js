@@ -8,6 +8,7 @@ import {
 import RestaurantIndexContainer from './containers/RestaurantIndexContainer';
 import EventIndexContainer from './containers/EventIndexContainer';
 import NewEventContainer from './containers/NewEventContainer';
+import InvitedEventsContainer from './containers/InvitedEventContainer';
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
                     Home
                 </NavLink>
                 <NavLink 
+                  className="bg-gray-900 text-white px-4 py-3 rounded-md text-sm font-large" 
+                  activeClassName="text-purple-200"
+                  exact
+                  to="/invited_events"
+                  >
+                    Invited
+                </NavLink>
+                <NavLink 
                   className="bg-gray-900 text-white px-4 py-3 rounded-md text-sm font-xl" 
                   activeClassName="text-purple-200"
                   to="/restaurants"
@@ -39,6 +48,9 @@ function App() {
         <Switch>
           <Route exact path="/" >
             <EventIndexContainer/>
+          </Route>
+          <Route path="/invited_events">
+            <InvitedEventsContainer />
           </Route>
           <Route path="/restaurants">
             <RestaurantIndexContainer/>
