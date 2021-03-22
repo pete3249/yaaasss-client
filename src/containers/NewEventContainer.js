@@ -12,7 +12,8 @@ class NewEventContainer extends React.Component {
         location: this.props.location.state.restaurant.name,
         address: this.props.location.state.restaurant.location.address1,
         notes: '',
-        invited_user_ids: []
+        invited_user_ids: [],
+        errors: {}
     }
 
     componentDidMount() { 
@@ -20,7 +21,9 @@ class NewEventContainer extends React.Component {
     }
 
     handleChange = e => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     handleFriendChange = userId => {
@@ -39,24 +42,36 @@ class NewEventContainer extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.createEvent(this.state)
+        this.createEvent()
         .then(eventJson => {
             this.props.dispatchAddEvent(eventJson)
             this.props.history.push('/');
         })
         .catch((errors) => {
-            console.log(errors);
+            this.setState({
+                errors: errors
+            })
         })
     }
 
-    createEvent = (eventData) => {
+    createEvent = () => {
         return fetch('http://localhost:3001/events', {
             method: 'POST',
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({event: eventData})
+            body: JSON.stringify({event: 
+                {
+                    name: this.state.name,
+                    start_time: this.state.start_time,
+                    end_time: this.state.end_time,
+                    location: this.state.location,
+                    address: this.state.address,
+                    notes: this.state.notes,
+                    invited_user_ids: this.state.invited_user_ids,
+                }
+            })
         })
         .then(res => {
             if(res.ok) {
@@ -72,6 +87,7 @@ class NewEventContainer extends React.Component {
             <div>
                 <h1 className="text-gray-900 text-center text-3xl font-semibold pt-6">Create event</h1>
                 <form onSubmit={this.handleSubmit} className="text-gray-900 max-w-lg mx-auto w-3/4 mt-2">
+                <p className="pl-4 h-8 text-red-400">{this.state.errors.name}</p>
                     <fieldset>
                         <label htmlFor="name" className="block">
                             Name
