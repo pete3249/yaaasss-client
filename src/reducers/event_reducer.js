@@ -1,7 +1,8 @@
 import { 
     START_LOADING_EVENTS,
     ADD_EVENTS,
-    SUCCESSFULLY_LOADED_EVENTS
+    SUCCESSFULLY_LOADED_EVENTS,
+    ADD_EVENT
 } from '../actions/index';
 
 const initialState = {
@@ -25,6 +26,16 @@ export default function EventReducer(state = initialState, action) {
             return {
                 ...state,
                 loadingState: 'complete'
+            }
+        case ADD_EVENT:
+            const foundEvent = state.createdEvents.find(event => event.id === action.payload.id)
+            if (foundEvent) {
+                return state
+            } else {
+                return {
+                    ...state,
+                    createdEvents: state.createdEvents.concat(action.payload)
+                }
             }
         default:
             return state
