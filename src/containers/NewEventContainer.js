@@ -15,7 +15,7 @@ class NewEventContainer extends React.Component {
     }
 
     componentDidMount() { 
-        this.props.fetchUsers();
+        this.props.dispatchFetchUsers();
     }
 
     handleChange = e => {
@@ -38,7 +38,7 @@ class NewEventContainer extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.createEvent(this.state);
+        this.createEvent(this.state)
     }
 
     createEvent = (eventData) => {
@@ -174,7 +174,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUsers: () => dispatch(fetchUsers()),
+        dispatchFetchUsers: () => dispatch(fetchUsers()),
     }
 }
 
