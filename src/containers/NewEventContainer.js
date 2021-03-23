@@ -1,8 +1,7 @@
 import React from 'react';
 import Checkbox from '../components/Checkbox';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions/users';
-import { addEvent } from '../actions/event'
+import { addEvent } from '../actions/event';
 
 class NewEventContainer extends React.Component {
     state = {
@@ -14,10 +13,6 @@ class NewEventContainer extends React.Component {
         notes: '',
         invited_user_ids: [],
         errors: {}
-    }
-
-    componentDidMount() { 
-        this.props.dispatchFetchUsers();
     }
 
     handleChange = e => {
@@ -192,7 +187,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchFetchUsers: () => dispatch(fetchUsers()),
         dispatchAddEvent: event => dispatch(addEvent(event))
     }
 }
