@@ -49,7 +49,7 @@ export const deleteEvent = eventId => {
     }
 }
 
-export const dispatchFetchInvitedEvents = () => {
+export const fetchInvitedEvents = () => {
     return (dispatch) => {
         dispatch({type: START_LOADING_EVENTS})
         fetch('http://localhost:3001/events', {
@@ -62,7 +62,7 @@ export const dispatchFetchInvitedEvents = () => {
         .then(eventsJson => {
             dispatch({
                 type: ADD_INVITED_EVENTS,
-                payload: eventsJson.invited_events,
+                payload: eventsJson.invited_events
             });
         })
         .then(() => dispatch({type: SUCCESSFULLY_LOADED_EVENTS}))
