@@ -1,20 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/event';
-import { deleteEvent } from '../actions/event';
+import { fetchEvents, deleteEvent } from '../actions/event';
+import { fetchUsers } from '../actions/users';
 import CreatedEventList from '../components/CreatedEventList';
 
 class EventIndexContainer extends React.Component {
     componentDidMount() { 
-        if(this.props.loadingState === 'notStarted') {
-            this.props.fetchEvents();
-        }
+        this.props.dispatchFetchEvents();
+        this.props.dispatchFetchUsers();
     }
 
     render() {
         return (
             <div>
-                {this.props.createdEvents.length > 0 ? (< CreatedEventList events={this.props.createdEvents} handleDeleteEvent={this.props.dispatchHandleDeleteEvent} />) : ''}
+                {this.props.createdEvents.length > 0 ? (< CreatedEventList events={this.props.createdEvents} handleDeleteEvent={this.props.dispatchHandleDeleteEvent} />) : (<p className="text-gray-900 text-center text-3xl font-semibold pt-6 pb-6">No created events yet!</p>)}
             </div>
         )
     }
@@ -22,15 +21,14 @@ class EventIndexContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        loadingState: state.events.loadingState,
-        createdEvents: state.events.createdEvents,
-        invitedEvents: state.events.invitedEvents
+        createdEvents: state.events.createdEvents
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchEvents: () => dispatch(fetchEvents()),
+        dispatchFetchEvents: () => dispatch(fetchEvents()),
+        dispatchFetchUsers: () => dispatch(fetchUsers()),
         dispatchHandleDeleteEvent: eventId => dispatch(deleteEvent(eventId))
     }
 }
