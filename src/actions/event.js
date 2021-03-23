@@ -27,6 +27,28 @@ export const fetchEvents = () => {
     }
 }
 
+export const deleteEvent = eventId => {
+    return (dispatch) => {
+        return fetch(`http://localhost:3001/events/${eventId}`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            }
+        })
+        .then(res => {
+            if (res.ok) {
+                dispatch({
+                    type: DELETE_EVENT,
+                    payload: eventId
+                })
+            } else {
+              console.log(res)
+            }
+        })
+    }
+}
+
 export const dispatchFetchInvitedEvents = () => {
     return (dispatch) => {
         dispatch({type: START_LOADING_EVENTS})
@@ -52,28 +74,6 @@ export const addEvent = event => {
         dispatch({
             type: ADD_EVENT, 
             payload: event
-        })
-    }
-}
-
-export const deleteEvent = eventId => {
-    return (dispatch) => {
-        return fetch(`http://localhost:3001/events/${eventId}`, {
-            method: 'DELETE',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            }
-        })
-        .then(res => {
-            if (res.ok) {
-                dispatch({
-                    type: DELETE_EVENT,
-                    payload: eventId
-                })
-            } else {
-              console.log(res)
-            }
         })
     }
 }
