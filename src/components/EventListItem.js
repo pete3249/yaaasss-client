@@ -18,8 +18,8 @@ class EventListItem extends React.Component {
                     <p>Date: <Moment format="MMMM Do YYYY">{e.start_time}</Moment></p> 
                     <p>Start: <Moment format="h:mm a">{e.start_time}</Moment></p> 
                     <p>End: <Moment format="h:mm a">{e.end_time}</Moment></p> 
-                    <p>Invited: {e.invited_users.map((user) => user.username).join(', ')}</p>
-                    <p>Attending: {e.attendees.length !== 0 ? `${e.attendees.map((attendee) => attendee.username).join(', ')}` : 'None'}</p>
+                    <p>Invited: {e.invited_users ? (e.invited_users.map((user) => user.username).join(', ')) : ''}</p>
+                    <p>Attending: {e.attendees ? `${e.attendees.map((attendee) => attendee.username).join(', ')}` : 'None'}</p>
                     <p>Notes: {e.notes}</p>
                 </div>   
             </div>
