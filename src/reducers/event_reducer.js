@@ -29,14 +29,9 @@ export default function EventReducer(state = initialState, action) {
                 loadingState: 'complete'
             }
         case ADD_EVENT:
-            const foundEvent = state.createdEvents.find(event => event.id === action.payload.id)
-            if (foundEvent) {
-                return state
-            } else {
-                return {
-                    ...state,
-                    createdEvents: state.createdEvents.concat(action.payload)
-                }
+            return {
+                ...state,
+                createdEvents: state.createdEvents.concat(action.payload)
             }
         case ADD_INVITED_EVENTS:
             return {
