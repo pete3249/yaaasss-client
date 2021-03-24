@@ -10,7 +10,7 @@ Fork and clone this repository as well as the [Rails API Backend](https://github
 
 In the backend, install [PostgreSQL](https://www.postgresql.org/docs/) and run `rails db:create` and `rails db:migrate.` This will create the database needed for your application. 
 
-Obtain your API Key from [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/get_started) and create a `.env` file to store your it in a global variable (API_KEY='YOUR_KEY')
+Obtain your API Key from [Yelp Fusion API](https://www.yelp.com/developers/documentation/v3/get_started) and create a new `.env` file to store it. You can store your key in a global variable (API_KEY='YOUR_KEY') and add your `.env` file to `Gitignore`. 
 
 Finally, run `rails s` to start the Rails server and navigate to the homepage [localhost:3001](localhost:3001/) to confirm it is working correctly. 
 
