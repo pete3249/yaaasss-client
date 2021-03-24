@@ -47,7 +47,7 @@ class InvitedEventListItem extends React.Component {
                         <button 
                             className="bg-gray-900 text-white px-8 py-3 rounded rounded-md text-sm font-large hover:bg-purple-500 border my-3"
                             name="going"
-                            onClick={() => this.props.dispatchHandleClick(e.invited_users.filter(user => user.id === this.props.currentUser).user_event, false)}
+                            onClick={() => this.props.handleClick(e.invited_users.find(user => user.id === this.props.currentUser).user_event, false)}
                         >
                             No
                         </button>
